@@ -1,38 +1,27 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
 
-import List from '../Component/List'
-import Input from '../Component/Input'
-import Title from '../Component/Title'
+import List from '../Component/List';
+import Input from '../Component/Input';
+import Title from '../Component/Title';
+import { actionCreators } from '../Redux/todo/action';
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      todos: ['Click to remove', 'Learn React Native', 'Write Code', 'Ship App'],
-    };
-  }
-  
-  
   onAddTodo = (text) => {
-    const {todos} = this.state;
+    const {dispatch} = this.props;
     
-    this.setState({
-      todos: [text, ...todos],
-    })
+    dispatch(actionCreators.add(text))
   };
   
   onRemoveTodo = (index) => {
-    const {todos} = this.state;
+    const {dispatch} = this.props;
     
-    this.setState({
-      todos: todos.filter((todo, i) => i !== index),
-    })
+    dispatch(actionCreators.remove(index))
   };
   
   render() {
-    const {todos} = this.state;
+    const {todos} = this.props;
     return (
       <View>
         <Title>
@@ -51,4 +40,8 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = (state) => ({
+  todos: state.todos
+});
+
+export default connect(mapStateToProps)(Main);
