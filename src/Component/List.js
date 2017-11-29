@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import CheckBox from 'react-native-check-box';
+
+import Button from './IosButton';
 
 const styles = StyleSheet.create({
   item: {
@@ -14,13 +21,22 @@ class List extends Component {
     const {onPressItem} = this.props;
     
     return (
-      <TouchableOpacity
+      <View
         style={styles.item}
-        onPress={() => onPressItem(i)}
         key={i}
       >
-        <Text>{text}</Text>
-      </TouchableOpacity>
+        <CheckBox
+          rightText={text}
+          onClick={(e) => {
+            console.log(i)
+          }}
+        />
+        <Button
+          onPress={onPressItem}
+          index={i}
+          title={'삭제'}
+        />
+      </View>
     )
   };
   

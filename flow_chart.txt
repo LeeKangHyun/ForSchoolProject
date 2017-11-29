@@ -1,0 +1,8 @@
+1. RfId 수신
+  1) 동일 값 x: 추가 modal
+  2) 동일 값 o:
+    if 1 진동 + 소리 + 도난 화면
+    else continue
+
+
+@추가화면 ==

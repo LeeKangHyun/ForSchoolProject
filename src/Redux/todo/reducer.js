@@ -5,8 +5,32 @@
 // - We set \`state\` to our \`initialState\` by default. Redux will
 //   call reducer() with no state on startup, and we are expected to
 //   return the initial state of the app in this case.
+
+/*
+@json1
+@RFID => 고유값 number
+@name => string
+json1 = [
+  {RFID: name},
+  {RFID: name},
+  {RFID: name},
+  ...
+]
+
+@json2
+@RFID => number
+@YNsteal => boolean
+json2 = [
+  {RFID: YNsteal},
+  {RFID: YNsteal},
+  {RFID: YNsteal},
+  ...
+]
+ */
 export const reducer = (state = {
-  todos: ['Click to remove', 'Learn React Native', 'Write Code', 'Ship App'],
+  todos: [
+  
+  ],
 }, action) => {
   const { type, payload } = action;
   switch (type) {

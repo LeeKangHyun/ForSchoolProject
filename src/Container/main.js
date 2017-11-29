@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView, } from 'react-native';
 import { connect } from 'react-redux';
 
 import List from '../Component/List';
@@ -23,19 +23,19 @@ class Main extends Component {
   render() {
     const {todos} = this.props;
     return (
-      <View>
+      <ScrollView>
         <Title>
           To-Do List
         </Title>
         <Input
-          placeholder={'Type a todo, then hit enter!'}
+          placeholder={'목록 만들기 임시 input'}
           onSubmitEditing={this.onAddTodo}
         />
         <List
           list={todos}
           onPressItem={this.onRemoveTodo}
         />
-      </View>
+      </ScrollView>
     )
   }
 }
