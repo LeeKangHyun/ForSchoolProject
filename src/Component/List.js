@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import CheckBox from 'react-native-check-box';
@@ -10,9 +9,12 @@ import Button from './IosButton';
 
 const styles = StyleSheet.create({
   item: {
+    flexDirection: "row",
     backgroundColor: 'whitesmoke',
     marginBottom: 5,
     padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -30,12 +32,22 @@ class List extends Component {
           onClick={(e) => {
             console.log(i)
           }}
+          style={{
+            flex: 3
+          }}
         />
-        <Button
-          onPress={onPressItem}
-          index={i}
-          title={'삭제'}
-        />
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'skyblue'
+          }}
+        >
+          <Button
+            onPress={onPressItem}
+            index={i}
+            title={'삭제'}
+          />
+        </View>
       </View>
     )
   };

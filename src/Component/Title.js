@@ -4,11 +4,15 @@ import { View, Text, StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   header: {
     backgroundColor: 'skyblue',
-    padding: 15,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
     textAlign: 'center',
     color: 'white',
+    fontSize: 16,
+    fontWeight: "bold"
   },
 });
 
