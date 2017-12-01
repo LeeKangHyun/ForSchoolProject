@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import List from '../Component/List';
 import Title from '../Component/Title';
 import IosButton from '../Component/IosButton';
-import Alert from '../Component/modal/alert';
+import ModalAdd from '../Component/modal/ModalAdd';
 
 import { createRfid, changeRfid, removeRfid } from '../Redux/rfid/action';
 import { alert_modal } from '../Redux/modal/action';
@@ -18,15 +18,6 @@ const styleSheet = StyleSheet.create({
 });
 
 class Main extends Component {
-  state = {
-    visible: false,
-  };
-  
-  onAddRfId = () => {
-    const { createRfid } = this.props;
-    this.setState({visible: true})
-  };
-  
   render() {
     const {
       rfid,
@@ -35,12 +26,12 @@ class Main extends Component {
       alert,
       alert_modal,
     } = this.props;
-    console.log(alert);
     return (
       <View style={styleSheet.container}>
         <Title>
           나의 물건을 책임져라
         </Title>
+        
         <View style={{
           flex: 1,
           justifyContent: 'center',
@@ -54,6 +45,7 @@ class Main extends Component {
             }}
           />
         </View>
+        
         <View style={{flex: 8}}>
           <ScrollView>
             <List
@@ -63,7 +55,7 @@ class Main extends Component {
             />
           </ScrollView>
         </View>
-        <Alert visible={alert.on}/>
+        <ModalAdd visible={alert.on}/>
       </View>
     )
   }

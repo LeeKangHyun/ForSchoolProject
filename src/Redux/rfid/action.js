@@ -1,14 +1,29 @@
 export function createRfid(rfid, name, state = true) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     let data = {
       rfid: rfid,
       name: name,
       state: state
     };
-  
-    dispatch({
-      type: "RFID_CREATE_ITEM",
-      obj: data
+    
+    let blueT = getState().rfid.blueT;
+    return new Promise((resolve, reject) => {
+      for (let key in blueT) {
+        if (blueT.hasOwnProperty(key)) {
+          let obj = blueT[key];
+          if (rfid === obj.rfid) {
+            reject();
+          }
+        }
+      }
+      resolve();
+    }).then(() => {
+      dispatch({
+        type: "RFID_CREATE_ITEM",
+        obj: data
+      })
+    }).catch(err => {
+      console.log(err)
     })
   }
 }

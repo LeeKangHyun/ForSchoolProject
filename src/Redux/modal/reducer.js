@@ -1,5 +1,7 @@
 export default function (state = {
-  alert: false
+  alert: {
+    on: false,
+  }
 }, action) {
   const { alert } = state;
   switch (action.type) {
