@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Modal, Text, TouchableHighlight, View } from 'react-native';
+import {
+  Modal,
+  Text,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { alert_modal } from '../../Redux/modal/action';
 
 class ModalExample extends Component {
   static defaultProps = {
@@ -7,29 +17,56 @@ class ModalExample extends Component {
   };
   
   render() {
-    const { visible, close } = this.props;
+    const {
+      visible,
+      alert_modal,
+    } = this.props;
     return (
-      <View style={{marginTop: 22}}>
-        <Modal
-          animationType="fade"
-          transparent={false}
-          visible={visible}
-          onRequestClose={() => {alert("Modal has been closed.")}}
-        >
-         <View style={{marginTop: 22}}>
-          <View>
-            <Text>Hello World!</Text>
-
-            <TouchableHighlight>
-              <Text>닫기</Text>
-            </TouchableHighlight>
-
+      <Modal
+        animationType="fade"
+        visible={visible}
+        transparent={true}
+      >
+        <View style={{
+          marginTop: 22,
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)'
+        }}>
+          <View style={{
+            height: 300,
+            width: 300,
+            padding: 15,
+            borderWidth: 1,
+            borderColor: '#efefef',
+            borderRadius: 15,
+            backgroundColor: '#fff',
+          }}>
+            <Text>입력 받기</Text>
+            <TouchableWithoutFeedback onPress={() => {
+              alert_modal(false)
+            }}>
+              <View>
+                <Text>닫기</Text>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
-         </View>
-        </Modal>
-      </View>
+        </View>
+      </Modal>
     );
   }
 }
 
-export default ModalExample;
+const mapStateToProps = (state) => ({
+  alert: state.modal.alert,
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    alert_modal
+  }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalExample);

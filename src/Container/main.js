@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, } from 'react-native';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
 
 import List from '../Component/List';
 import Title from '../Component/Title';
 import IosButton from '../Component/IosButton';
+import Alert from '../Component/modal/alert';
 
 import { createRfid, changeRfid, removeRfid } from '../Redux/rfid/action';
+import { alert_modal } from '../Redux/modal/action';
 
 const styleSheet = StyleSheet.create({
   container: {
@@ -28,10 +30,12 @@ class Main extends Component {
   render() {
     const {
       rfid,
-      createRfid,
       changeRfid,
       removeRfid,
+      alert,
+      alert_modal,
     } = this.props;
+    console.log(alert);
     return (
       <View style={styleSheet.container}>
         <Title>
@@ -45,6 +49,9 @@ class Main extends Component {
           <IosButton
             title={"추가"}
             color={"#000"}
+            onPress={() => {
+              alert_modal(true)
+            }}
           />
         </View>
         <View style={{flex: 8}}>
@@ -56,6 +63,7 @@ class Main extends Component {
             />
           </ScrollView>
         </View>
+        <Alert visible={alert.on}/>
       </View>
     )
   }
@@ -63,6 +71,7 @@ class Main extends Component {
 
 const mapStateToProps = (state) => ({
   rfid: state.rfid,
+  alert: state.modal.alert,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -70,6 +79,7 @@ const mapDispatchToProps = dispatch => {
     createRfid,
     changeRfid,
     removeRfid,
+    alert_modal,
   }, dispatch)
 };
 
