@@ -6,7 +6,11 @@ import {
 
 class IosButton extends Component {
   static defaultProps = {
-    color: 'white'
+    style: {
+      flex: 1
+    },
+    color: 'white',
+    title: 'null'
   };
   
   render() {
@@ -20,7 +24,7 @@ class IosButton extends Component {
     return (
       <TouchableOpacity style={style}>
         <Button
-          onPress={() => {onPress(index)}}
+          onPress={() => {index ? onPress(index):onPress()}}
           title={title}
           color={color}
         />

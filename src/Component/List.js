@@ -19,45 +19,51 @@ const styles = StyleSheet.create({
 });
 
 class List extends Component {
-  renderItem = (text, i) => {
+  renderItem = data => {
     const {onPressItem} = this.props;
+    const {btList, btState} = data;
+  
+    btList.map((list) => {
     
-    return (
-      <View
-        style={styles.item}
-        key={i}
-      >
-        <CheckBox
-          rightText={text}
-          onClick={(e) => {
-            console.log(i)
-          }}
-          style={{
-            flex: 3
-          }}
-        />
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: 'skyblue'
-          }}
-        >
-          <Button
-            onPress={onPressItem}
-            index={i}
-            title={'삭제'}
-          />
-        </View>
-      </View>
-    )
+    })
+    // return (
+    //   <View
+    //     style={styles.item}
+    //     key={i}
+    //   >
+    //     <CheckBox
+    //       rightText={text}
+    //       onClick={(e) => {
+    //         console.log(i)
+    //       }}
+    //       style={{
+    //         flex: 3
+    //       }}
+    //     />
+    //     <View
+    //       style={{
+    //         flex: 1,
+    //         backgroundColor: 'skyblue'
+    //       }}
+    //     >
+    //       <Button
+    //         onPress={onPressItem}
+    //         index={i}
+    //         title={'삭제'}
+    //       />
+    //     </View>
+    //   </View>
+    // )
   };
   
-  render() {
-    const {list} = this.props;
   
+  
+  render() {
+    const { data } = this.props;
+    console.log(data);
     return (
       <View>
-        {list.map(this.renderItem)}
+        {this.renderItem(data)}
       </View>
     )
   }
