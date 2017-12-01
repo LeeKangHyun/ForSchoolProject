@@ -20,47 +20,48 @@ const styles = StyleSheet.create({
 
 class List extends Component {
   renderItem = data => {
-    const {onPressItem} = this.props;
-    const {btList, btState} = data;
-  
-    btList.map((list) => {
+    const {onPressItem, onChangeItem, onRemoveItem} = this.props;
+    const {blueT} = data;
     
+    return blueT.map((list) => {
+      return (
+        <View
+          style={styles.item}
+          key={list.rfid}
+        >
+          <CheckBox
+            rightText={list.name}
+            onClick={(e) => {
+              onChangeItem(list.rfid, !list.state)
+            }}
+            style={{
+              flex: 3
+            }}
+            isChecked={list.state}
+          />
+          
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: 'skyblue'
+            }}
+          >
+            <Button
+              onPress={() => {
+                onRemoveItem(list.rfid)
+              }}
+              title={'삭제'}
+            />
+          </View>
+        </View>
+      )
     })
-    // return (
-    //   <View
-    //     style={styles.item}
-    //     key={i}
-    //   >
-    //     <CheckBox
-    //       rightText={text}
-    //       onClick={(e) => {
-    //         console.log(i)
-    //       }}
-    //       style={{
-    //         flex: 3
-    //       }}
-    //     />
-    //     <View
-    //       style={{
-    //         flex: 1,
-    //         backgroundColor: 'skyblue'
-    //       }}
-    //     >
-    //       <Button
-    //         onPress={onPressItem}
-    //         index={i}
-    //         title={'삭제'}
-    //       />
-    //     </View>
-    //   </View>
-    // )
   };
   
   
   
   render() {
     const { data } = this.props;
-    console.log(data);
     return (
       <View>
         {this.renderItem(data)}

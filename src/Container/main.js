@@ -7,7 +7,7 @@ import List from '../Component/List';
 import Title from '../Component/Title';
 import IosButton from '../Component/IosButton';
 
-import { createRfid } from '../Redux/rfid/action';
+import { createRfid, changeRfid, removeRfid } from '../Redux/rfid/action';
 
 const styleSheet = StyleSheet.create({
   container: {
@@ -26,13 +26,22 @@ class Main extends Component {
   };
   
   render() {
-    const { rfid } = this.props;
+    const {
+      rfid,
+      createRfid,
+      changeRfid,
+      removeRfid,
+    } = this.props;
     return (
       <View style={styleSheet.container}>
         <Title>
           나의 물건을 책임져라
         </Title>
-        <View style={{flex: 1}}>
+        <View style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
           <IosButton
             title={"추가"}
             color={"#000"}
@@ -41,6 +50,8 @@ class Main extends Component {
         <View style={{flex: 8}}>
           <ScrollView>
             <List
+              onChangeItem={changeRfid}
+              onRemoveItem={removeRfid}
               data={rfid}
             />
           </ScrollView>
@@ -57,6 +68,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     createRfid,
+    changeRfid,
+    removeRfid,
   }, dispatch)
 };
 
