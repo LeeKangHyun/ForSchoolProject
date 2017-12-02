@@ -86,6 +86,30 @@ class ModalAdd extends Component {
                 style={{
                 }}
               >
+                RfId :
+              </Text>
+              <TextInput
+                onChangeText={(text) => {
+                  this.setState({rfid: +text})
+                }}
+                style={{
+                  padding: 3,
+                  flex: 1,
+                  borderWidth: 1,
+                  borderColor: '#efefef'
+                }}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <Text
+                style={{
+                }}
+              >
                 NAME :
               </Text>
               <TextInput
